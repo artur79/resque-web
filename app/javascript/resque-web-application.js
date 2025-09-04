@@ -1,0 +1,5 @@
+import './bootstrap.js'
+import './failure.js'
+import '../assets/javascripts/resque_web/jquery.relative-date.js'
+import './pooling.js'
+import './relative_date.js'

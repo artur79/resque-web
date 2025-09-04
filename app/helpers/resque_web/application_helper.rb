@@ -65,5 +65,21 @@ module ResqueWeb
       end
       content_tag :p, text, :class => 'poll'
     end
+
+    def using_propshaft?
+      defined?(Propshaft) &&
+      defined?(Rails) &&
+      Rails.application &&
+      Gem.loaded_specs.key?('propshaft')
+    end
+
+    def asset_exists?(file_path)
+      if using_propshaft?
+        Rails.application.assets.load_path.find(file_path)
+      else
+        (Rails.application.assets && Rails.application.assets.find_asset(file_path)) ||
+        (Rails.application.assets_manifest && Rails.application.assets_manifest.assets[file_path])
+      end
+    end
   end
 end
